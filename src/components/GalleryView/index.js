@@ -1,38 +1,37 @@
 import { useParams, Redirect, Route } from "react-router-dom";
-import { Fragment } from "react/cjs/react.production.min";
+import ArtDescription from "../ArtDescription";
 import ArtImageTile from "../ArtImageTile";
-
-
-
 
 function GalleryView({ galleries }) {
 	const { galleryId } = useParams();
 	const thisGallery = galleries.find(gallery => gallery.galleryid === parseInt(galleryId));
-	// console.log(thisGallery)
 	if (thisGallery) {
 		return (
 			<>
 				<h2>{thisGallery.name}</h2>
 				<div>{thisGallery.labeltext}</div>
 				{
-					thisGallery.objects.map((image) => {
-						// return (
-						// 	<ArtImageTile key={image.id} art={image} galleryId={galleryId}></ArtImageTile>
-						// )
+					thisGallery.objects.map((art) => {
+						console.log(art);
 						return (
-							<Route key={image.id} path={`/galleries/:galleryId`}>
-								<ArtImageTile key={image.id} art={image} galleryId={galleryId} />
-							</Route>
+							<>
+								<Route key={art.id} exact path={`/galleries/:galleryId`}>
+									<ArtImageTile key={art.id} art={art} galleryId={galleryId} />
+								</Route>
+							</>
 						)
 					}
 					)
 				}
+				<Route path={`/galleries/:galleryId/art/:artId`}>
+					<ArtDescription objects={thisGallery.objects}></ArtDescription>
+				</Route>
 			</>
 		)
 	} else {
 		return (
 			<>
-				<Redirect to='/a;efioawe'></Redirect>
+				<Redirect to='/error-handling'></Redirect>
 			</>
 		)
 	}
