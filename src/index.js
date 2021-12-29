@@ -9,7 +9,6 @@ const Root = () => {
     <BrowserRouter>
       <App />
     </BrowserRouter>
-    // <h1>Hello from Root</h1>
   );
 };
 

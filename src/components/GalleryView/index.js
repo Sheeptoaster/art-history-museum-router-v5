@@ -7,8 +7,8 @@ function GalleryView({ galleries }) {
 	const thisGallery = galleries.find(gallery => gallery.galleryid === parseInt(galleryId));
 	if (thisGallery) {
 		return (
-			<>
-				<h2>{thisGallery.name}</h2>
+			<div className="column">
+				<h1 className="title">{thisGallery.name}</h1>
 				<div>{thisGallery.labeltext}</div>
 				{
 					thisGallery.objects.map((art) => {
@@ -26,7 +26,7 @@ function GalleryView({ galleries }) {
 				<Route path={`/galleries/:galleryId/art/:artId`}>
 					<ArtDescription objects={thisGallery.objects}></ArtDescription>
 				</Route>
-			</>
+			</div>
 		)
 	} else {
 		return (
